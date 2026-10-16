@@ -1,3 +1,4 @@
+const DEFAULT_KEY='2b10mkicnklPEdEkRjrQhhohu';
 'use strict';
 const PLANTS=[
 {n:'Sampaguita',s:'Jasminum sambac',c:'Ornamental',d:'Shrub with fragrant white flowers; the national flower of the Philippines.',u:'Garlands, perfume, tea scenting, offerings.'},
@@ -63,7 +64,7 @@ async function shrink(file){
  return file;
 }
 $('#go').onclick=async()=>{
- const key=store.get('key','');
+  const key=store.get('key','')||DEFAULT_KEY;
  if(!key){toast('Add your API key in Setup first.','err');location.hash='#settings';return}
  if(!navigator.onLine)return toast('You are offline. AI identification needs internet.','err');
  $('#loading').hidden=false;$('#go').disabled=true;$('#results').innerHTML='';
