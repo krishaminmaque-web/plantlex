@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1E6B4E">
+<meta name="mobile-web-app-capable" content="yes">
+<title>PlantLex AI</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header class="top"><span class="logo">🌿 PlantLex <b>AI</b></span><span id="net" class="pill">Online</span></header>
+<main id="main">
+  <section id="identify" class="view">
+    <div class="hero"><h1>Identify a Plant</h1><p>Take or upload a photo and the AI will suggest matches.</p></div>
+    <div class="card">
+      <label class="drop" for="file"><div id="dropText">📷<br><b>Tap to take or choose a photo</b><br><small>JPG, PNG or WebP, up to 5 MB</small></div><img id="preview" alt="Selected plant preview" hidden></label>
+      <input type="file" id="file" accept="image/*" hidden>
+      <label class="field">Plant part shown
+        <select id="organ"><option value="auto">Auto</option><option value="leaf">Leaf</option><option value="flower">Flower</option><option value="fruit">Fruit</option><option value="bark">Bark</option><option value="habit">Whole plant</option></select>
+      </label>
+      <button id="go" class="btn" disabled>Identify Plant</button>
+      <p class="note">AI identification needs internet. The dictionary works offline.</p>
+    </div>
+    <div id="loading" class="card center" hidden><div class="spin"></div><p>Analyzing your photo…</p></div>
+    <div id="results"></div>
+  </section>
+
+  <section id="dictionary" class="view">
+    <div class="hero"><h1>Plant Dictionary</h1></div>
+    <input id="q" class="search" type="search" placeholder="Search name, local name or use…" aria-label="Search plants">
+    <div id="chips" class="chips"></div>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <section id="history" class="view">
+    <div class="hero"><h1>Saved Identifications</h1></div>
+    <div id="hlist" class="grid"></div>
+    <button id="clear" class="btn ghost" hidden>Delete all</button>
+  </section>
+
+  <section id="settings" class="view">
+    <div class="hero"><h1>Setup</h1></div>
+    <div class="card">
+      <h3>Pl@ntNet API key</h3>
+      <p class="note">Get a free key at my.plantnet.org (Settings &rarr; API key). Turn on "expose my API key" there. Paste the key here; it is stored only on this device.</p>
+      <input id="key" class="search" type="password" placeholder="Paste API key" autocomplete="off">
+      <button id="saveKey" class="btn">Save key</button>
+      <p class="note">⚠️ A frontend-only app cannot hide the key. For production, use a backend proxy.</p>
+    </div>
+  </section>
+</main>
+<nav class="nav" aria-label="Main">
+  <a href="#identify" data-v="identify"><i>📷</i><span>Identify</span></a>
+  <a href="#dictionary" data-v="dictionary"><i>📖</i><span>Dictionary</span></a>
+  <a href="#history" data-v="history"><i>🕘</i><span>History</span></a>
+  <a href="#settings" data-v="settings"><i>⚙️</i><span>Setup</span></a>
+</nav>
+</div>
+<dialog id="dlg"><div id="dlgBody"></div><button class="btn" id="dlgClose">Close</button></dialog>
+<div id="toasts" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
