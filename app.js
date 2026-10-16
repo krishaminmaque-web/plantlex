@@ -102,7 +102,7 @@ $('#clear').onclick=()=>{if(confirm('Delete all saved records?')){store.set('his
 
 // Settings
 $('#key').value=store.get('key','');
-$('#saveKey').onclick=()=>{store.set('key',$('#key').value.trim());toast('API key saved','ok')};
+$('#saveKey').onclick=async()=>{const k=$('#key').value.trim();store.set('key',k);toast('API key saved','ok');try{const r=await fetch('https://my-api.plantnet.org/v2/projects?api-key='+encodeURIComponent(k));const t=await r.text();setTimeout(()=>toast('Test '+r.status+': '+t.slice(0,70),r.ok?'ok':'err'),1500)}catch(e){setTimeout(()=>toast('Test blocked: no reply allowed for this domain','err'),1500)}};
 
 // Online status + service worker
 function net(){const o=navigator.onLine;$('#net').textContent=o?'Online':'Offline';$('#net').classList.toggle('off',!o)}
